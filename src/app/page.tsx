@@ -12,7 +12,6 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("");
-
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const router = useRouter();
 
@@ -27,7 +26,7 @@ export default function Home() {
           page * 20
         }`
       );
-      const newCities = response.data.records.map((record: any) => ({
+      const newCities = response.data.results.map((record: any) => ({
         cityName: record.name,
         countryName: record.cou_name_en,
         timezone: record.timezone,
@@ -58,9 +57,12 @@ export default function Home() {
   const handleCityClick = (cityName: string) => {
     router.push(`/weather/${encodeURIComponent(cityName)}`);
   };
-  const handleContextMenu = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const cityName = e.currentTarget.textContent || ""; // Provide a default value if cityName is null
+
+  const handleContextMenu = (
+    event: React.MouseEvent<HTMLDivElement>,
+    cityName: string
+  ) => {
+    event.preventDefault();
     window.open(`/weather/${encodeURIComponent(cityName)}`, "_blank");
   };
 
@@ -139,13 +141,15 @@ export default function Home() {
                         <Link
                           href={`/weather/${encodeURIComponent(city.cityName)}`}
                         >
-                          <a
+                          <div
                             className="text-blue-500 hover:underline"
                             onClick={() => handleCityClick(city.cityName)}
-                            onContextMenu={handleContextMenu}
+                            onContextMenu={(
+                              event: React.MouseEvent<HTMLDivElement>
+                            ) => handleContextMenu(event, city.cityName)}
                           >
                             {city.cityName}
-                          </a>
+                          </div>
                         </Link>
                       </td>
                       <td className="border px-4 py-2">{city.countryName}</td>
