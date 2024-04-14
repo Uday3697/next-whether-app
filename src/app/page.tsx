@@ -54,8 +54,17 @@ export default function Home() {
     setCities(filteredCities);
   };
 
-  const handleCityClick = (cityName: string) => {
-    router.push(`/weather/${encodeURIComponent(cityName)}`);
+  // const handleCityClick = (cityName: string) => {
+  //   router.push(`/weather/${encodeURIComponent(cityName)}`);
+  // };
+  // Home.tsx (Updated handleCityClick function)
+
+  const handleCityClick = (city: any) => {
+    const { coordinates } = city;
+    if (coordinates) {
+      const { lat, lon } = coordinates;
+      router.push(`/weather?latitude=${lat}&longitude=${lon}`);
+    }
   };
 
   const handleContextMenu = (
