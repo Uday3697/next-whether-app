@@ -98,6 +98,7 @@ export default function Home() {
       </div>
       <div className="min-h-screen bg-gray-900 text-white relative z-10">
         <div className="container mx-auto py-8">
+        <p className="text-lg shadow-md text-center mb-5">Weather-app</p>
           <input
             type="text"
             placeholder="Search cities..."
