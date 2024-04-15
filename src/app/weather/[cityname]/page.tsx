@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useRouter, useParams } from "next/navigation";
 
-const WeatherPage = () => {
-  const { cityname } = useParams();
+const WeatherPage = ({params}:{params: {cityname:string}}) => {
+  const  cityname  = params.cityname;
   const [weatherData, setWeatherData] = useState<any>(null);
 
 
