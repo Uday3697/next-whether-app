@@ -54,25 +54,25 @@ export default function Home() {
     setCities(filteredCities);
   };
 
-  // const handleCityClick = (cityName: string) => {
-  //   router.push(`/weather/${encodeURIComponent(cityName)}`);
-  // };
-  // Home.tsx (Updated handleCityClick function)
-
-  const handleCityClick = (city: any) => {
-    const { coordinates } = city;
-    if (coordinates) {
-      const { lat, lon } = coordinates;
-      router.push(`/weather?latitude=${lat}&longitude=${lon}`);
-    }
+  const handleCityClick = (cityName: string) => {
+    router.push(`/weather/${cityName}`);
   };
+ 
+
+  // const handleCityClick = (city: any) => {
+  //   const { coordinates } = city;
+  //   if (coordinates) {
+  //     const { lat, lon } = coordinates;
+  //     router.push(`/weather?latitude=${lat}&longitude=${lon}`);
+  //   }
+  // };
 
   const handleContextMenu = (
     event: React.MouseEvent<HTMLDivElement>,
     cityName: string
   ) => {
     event.preventDefault();
-    window.open(`/weather/${encodeURIComponent(cityName)}`, "_blank");
+    window.open(`/weather/${cityName}`, "_blank");
   };
 
   const handleSort = (column: string) => {
@@ -148,11 +148,11 @@ export default function Home() {
                     <tr key={index}>
                       <td className="border px-4 py-2">
                         <Link
-                          href={`/weather/${encodeURIComponent(city.cityName)}`}
+                          href={`/weather/${city.cityName}`}
                         >
                           <div
                             className="text-blue-500 hover:underline"
-                            onClick={() => handleCityClick(city.cityName)}
+                            // onClick={() => handleCityClick(city.cityName)}
                             onContextMenu={(
                               event: React.MouseEvent<HTMLDivElement>
                             ) => handleContextMenu(event, city.cityName)}
